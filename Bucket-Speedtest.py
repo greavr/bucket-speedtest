@@ -114,6 +114,7 @@ def IntroText():
     print("##########################")
     print("# Version: " + str(version))
     print("# Running on default parameters")
+    print("# Number of Itterations Per Download: " + str(NumItterations))
 
     print("# GCP Files:")
     for key, value in gcp_gcs.items():
@@ -127,7 +128,6 @@ def IntroText():
     for key, value in azure_blobs.items():
         print("# - " + key + " file = " +  value)
 
-    print("# Nmber of Itterations Per Download: " + str(NumItterations))
     print("##########################")
 
 def CurlFiles(FileType, FileToGet, ResultsSet):
