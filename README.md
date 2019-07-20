@@ -21,11 +21,12 @@ Each file is downloaded 3 times by default to generate statistics, this can be o
 * pip
 * libcurl4-openssl-dev
 * libssl-dev
+* python-curl
 
 *Debian*
 ```
 sudo apt-get update
-sudo apt-get install -y libcurl4-openssl-dev libssl-dev python3 python3-pip
+sudo apt-get install -y libcurl4-openssl-dev libssl-dev python3 python3-pip python-pycurl
 ```
 
 ## Install Steps
