@@ -9,10 +9,10 @@ import csv
 
 # File Lists
 gcp_gcs = {
-    "Coldline": "https://storage.googleapis.com/rgreaves-coldline/coldline-file.txt",
-    "Multi-Regional" : "https://storage.googleapis.com/rgreaves-multi-regional/multi-regional-file.txt",
-    "Regional" : "https://storage.googleapis.com/rgreaves-regional/regional-file.txt",
-    "Nearline" : "https://storage.googleapis.com/rgreaves-nearline/nearline-file.txt"
+    "Coldline": "https://storage.googleapis.com/rgreaves-coldline/coldline-file-100mb.txt",
+    "Multi-Regional" : "https://storage.googleapis.com/rgreaves-multi-regional/multi-regional-file-100mb.txt",
+    "Regional" : "https://storage.googleapis.com/rgreaves-regional/regional-file-100mb.txt",
+    "Nearline" : "https://storage.googleapis.com/rgreaves-nearline/nearline-file-100mb.txt"
 }
 aws_s3 = {
     "Standard" : "https://rgreaves-public.s3-us-west-2.amazonaws.com/standard.txt",
@@ -20,11 +20,11 @@ aws_s3 = {
     "One Zone Infrequent Access" : "https://rgreaves-public.s3-us-west-2.amazonaws.com/one_zone-ia.txt"
 }
 azure_blobs = {
-    "Premium Local Redundant Hot" : "https://lrshotpremium.blob.core.windows.net/public/lrshotpremium.txt",
-    "Hot Local Redundant" : "https://lrsblobhot.blob.core.windows.net/public/lrsblobhot.txt",
-    "Cool Local Redundant" : "https://lrsblobcool.blob.core.windows.net/public/lrsblobcool.txt",
-    "Hot Regionally Redundant" : "https://rahot.blob.core.windows.net/public/rahot.txt",
-    "Cool Regionally Redundant" : "https://racool.blob.core.windows.net/public/racool.txt"
+    "Premium Local Redundant Hot" : "https://lrshotpremium.blob.core.windows.net/public/lrshotpremium-100mb.txt",
+    "Hot Local Redundant" : "https://lrsblobhot.blob.core.windows.net/public/lrsblobhot-100mb.txt",
+    "Cool Local Redundant" : "https://lrsblobcool.blob.core.windows.net/public/lrsblobcool-100mb.txt",
+    "Hot Regionally Redundant" : "https://rahot.blob.core.windows.net/public/rahot-100mb.txt",
+    "Cool Regionally Redundant" : "https://racool.blob.core.windows.net/public/racool-100mb.txt"
 }
 
 # Parameters

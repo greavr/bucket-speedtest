@@ -1,0 +1,5 @@
+Premium Local Redundant Hot 1GB,https://lrshotpremium.blob.core.windows.net/public/lrshotpremium.txt
+Hot Local Redundant 1GB,https://lrsblobhot.blob.core.windows.net/public/lrsblobhot.txt
+Cool Local Redundant 1GB,https://lrsblobcool.blob.core.windows.net/public/lrsblobcool.txt
+Hot Regionally Redundant 1GB,https://rahot.blob.core.windows.net/public/rahot.txt
+Cool Regionally Redundant 1GB,https://racool.blob.core.windows.net/public/racool.txt

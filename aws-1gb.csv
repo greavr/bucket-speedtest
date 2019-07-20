@@ -1,0 +1,3 @@
+Standard 1GB,https://rgreaves-public.s3-us-west-2.amazonaws.com/standard.txt
+Infrequent Access 1GB,https://rgreaves-public.s3-us-west-2.amazonaws.com/standard-ia.txt
+One Zone Infrequent Access 1GB,https://rgreaves-public.s3-us-west-2.amazonaws.com/one_zone-ia.txt

@@ -54,9 +54,15 @@ This will output a list of all *optional* parameters, listed below:
 -azure This points to a CSV file which contains the Azure Storage Class and path to public file
 ```
 
+### Larger files
+A link to a set of 1GB sample files is also provided in the repo, use the following command to use them:
+```
+python Bucket-Speedtest.py -gcp gcp-1gb.csv -aws aws-1gb.csv -azure azure-1gb.csv
+```
+
 ### Example
 ```
-python Bucket-Speedtest.py -5 -gcp gcp-files.csv
+python Bucket-Speedtest.py -i 5 -gcp gcp-1gb.csv
 ```
 This will download each file 5 times, and will use a custom list of GCP files parsed from gcp-files.csv
 
