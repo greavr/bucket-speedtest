@@ -17,11 +17,10 @@ Default files are baked into the script, and can be over-ridden via flags below.
 Each file is downloaded 3 times by default to generate statistics, this can be over-ridden via flags below
 
 ## Requirements
-* Python
-* pip
+* Python3
+* pip3
 * libcurl4-openssl-dev
 * libssl-dev
-* python-curl
 
 *Debian*
 ```
@@ -33,12 +32,12 @@ sudo apt-get install -y libcurl4-openssl-dev libssl-dev python3 python3-pip pyth
 ```
 git clone https://github.com/greavr/bucket-speedtest/
 cd bucket-speedtest
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 ## Steps to run the script
 ```
-python Bucket-Speedtest.py
+python3 Bucket-Speedtest.py
 ```
 This will download a set of sample file from GCP, AWS, Azure which repesents each class of storage. Some Caveats:
 AWS Glacier is not able to make files publicly accessible, and must be called via API.
