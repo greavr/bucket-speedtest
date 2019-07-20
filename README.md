@@ -20,7 +20,7 @@ Each file is downloaded 3 times by default to generate statistics, this can be o
 ```
 git clone https://github.com/greavr/bucket-speedtest/
 cd bucket-speedtest
-pip install requirements.txt
+pip install -r requirements.txt
 ```
 
 ## Steps to run the script
