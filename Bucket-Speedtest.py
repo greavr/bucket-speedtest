@@ -30,6 +30,8 @@ azure_blobs = {
 # Parameters
 version=1.0
 NumItterations=''
+isVerbose=False
+isDefaultParams=True
 
 # Results
 GCP_Results = []
@@ -39,8 +41,8 @@ AZURE_Results = []
 def main():
     # Config Commandline arguments
     ap = argparse.ArgumentParser()
-    ap.add_argument("-i", "--itterations", required=False,
-    	help="Number of Itterations")
+    ap.add_argument("-i", "--itterations", required=False,help="Number of Itterations")
+    ap.add_argument("-v","--verbosity", help="increase output verbosity")
     ap.add_argument("-gcp", required=False, help="CSV File of two columns for GCP Files to download. CSV Format is 'Storage Type, Public URL'")
     ap.add_argument("-aws", required=False, help="CSV File of two columns for AWS Files to download. CSV Format is 'Storage Type, Public URL'")
     ap.add_argument("-azure", required=False, help="CSV File of two columns for Azure Files to download. CSV Format is 'Storage Type, Public URL'")
@@ -50,29 +52,39 @@ def main():
     global NumItterations
     if args["itterations"] is not None:
         NumItterations = int(args["itterations"])
+        isDefaultParams=False
     else:
         NumItterations = 3
+
+    # Set verbosity
+    global isVerbose
+    if args["verbosity"] is not None:
+        isVerbose=True
+        isDefaultParams=False
 
     # Read CSV File
     global gcp_gcs
     if args["gcp"] is not None:
         gcp_gcs = {}
         ReadTypes(args["gcp"],gcp_gcs)
+        isDefaultParams=False
 
     global aws_s3
     if args["aws"] is not None:
         aws_s3 = {}
         ReadTypes(args["aws"],aws_s3)
+        isDefaultParams=False
 
     global azure_blobs
     if args["azure"] is not None:
         azure_blobs = {}
         ReadTypes(args["azure"],azure_blobs)
+        isDefaultParams=False
 
     IntroText()
 
     # GCP Sets
-    print("----- GCP Benchmark -----")
+    print("------ GCP Benchmark ------")
     for key, value in gcp_gcs.items():
         print("--- " + key)
         CurlFiles(key,value, GCP_Results)
@@ -81,7 +93,7 @@ def main():
     OutPutResults(GCP_Results)
 
     # AWS Sets
-    print("----- AWS Benchmark -----")
+    print("------ AWS Benchmark ------")
     for key, value in aws_s3.items():
         print("--- " + key)
         CurlFiles(key,value, AWS_Results)
@@ -90,7 +102,7 @@ def main():
     OutPutResults(AWS_Results)
 
     # Azure Sets
-    print("----- Azure Benchmark -----")
+    print("------ Azure Benchmark ------")
     for key, value in azure_blobs.items():
         print("--- " + key)
         CurlFiles(key,value, AZURE_Results)
@@ -113,7 +125,15 @@ def ReadTypes(InputFile, FileListArray):
 def IntroText():
     print("##########################")
     print("# Version: " + str(version))
-    print("# Running on default parameters")
+    # Over-riding paramteres
+    if isDefaultParams:
+        print("# Running on default parameters")
+    else:
+        print("# Running on custom parameters")
+    # Verbose Logging
+    if isVerbose:
+        print("# Verbose Log Output")
+
     print("# Number of Itterations Per Download: " + str(NumItterations))
 
     print("# GCP Files:")
@@ -145,12 +165,17 @@ def CurlFiles(FileType, FileToGet, ResultsSet):
         c = pycurl.Curl()
         c.setopt(pycurl.URL, FileToGet)              #set url
         c.setopt(pycurl.FOLLOWLOCATION, 1)
-        content = c.perform()                        #execute
+        with open('o.txt', 'wb') as f:                  # Write to a temp file
+            c.setopt(c.WRITEFUNCTION, f.write)
+            content = c.perform()                        #execute
         conn_time = c.getinfo(pycurl.CONNECT_TIME)   #TCP/IP 3-way handshaking time
         starttransfer_time = c.getinfo(pycurl.STARTTRANSFER_TIME)  #time-to-first-byte time
         total_time = c.getinfo(pycurl.TOTAL_TIME)  #last requst time
         file_size = c.getinfo(pycurl.CONTENT_LENGTH_DOWNLOAD) # File Size
         c.close()
+
+        #Delete temp file
+        os.remove("o.txt")
 
         # Total time
         end = time.time()
@@ -162,14 +187,17 @@ def CurlFiles(FileType, FileToGet, ResultsSet):
         # Save results
         results.append([conn_time,total_time,Speed])
 
-        # Console Out Results
-        print("  Itteration: " + str(z) + " | TCP/IP Handshake time: " + str(conn_time) + " (secs) | File Size: " + str(file_size) + " bytes | TTFB: " + str(starttransfer_time) + " (secs) | Time to Download: " + str(total_time) + " (secs) | Download Speed: " + str(Speed) + " (MB/s) | Total Time To Execute: " + str(timetaken) + " (secs)")
-
         #Increament itterations
         z += 1
 
+        # Console Out Results
+        if isVerbose:
+            print("  Itteration: " + str(z) + " | TCP/IP Handshake time: " + str(conn_time) + " (secs) | File Size: " + str(file_size) + " bytes | TTFB: " + str(starttransfer_time) + " (secs) | Time to Download: " + str(total_time) + " (secs) | Download Speed: " + str(Speed) + " (MB/s) | Total Time To Execute: " + str(timetaken) + " (secs)")
+        else:
+            print("  Itteration: " + str(z) + "/" + str(NumItterations) + " completed")
+
     ResultsSet.append(CalcAverages(results, FileType))
-    print("-------------------------")
+    print("---------------------------")
 
 def CalcAverages(results, FileType):
     # Used to calculate the 50%, 95% and 99% average
@@ -205,12 +233,13 @@ def CalcAverages(results, FileType):
     Speed_99 = np.percentile(temp_np, 99)
 
     # Output results
-    print("- Averages Time To First Byte:")
-    print("  50th " + str(TTFB_50) + " | 95th " + str(TTFB_95) + " | 99th " + str(TTFB_99))
-    print("- Average Download Time:")
-    print("  50th " + str(DownloadTime_50) + " | 95th " + str(DownloadTime_95) + " | 99th " + str(DownloadTime_99))
-    print("- Average Download Speed:")
-    print("  50th " + str(Speed_50) + " | 95th " + str(Speed_95) + " | 99th " + str(Speed_99))
+    if isVerbose:
+        print("- Averages Time To First Byte:")
+        print("  50th " + str(TTFB_50) + " | 95th " + str(TTFB_95) + " | 99th " + str(TTFB_99))
+        print("- Average Download Time:")
+        print("  50th " + str(DownloadTime_50) + " | 95th " + str(DownloadTime_95) + " | 99th " + str(DownloadTime_99))
+        print("- Average Download Speed:")
+        print("  50th " + str(Speed_50) + " | 95th " + str(Speed_95) + " | 99th " + str(Speed_99))
 
     #Return Results
     return ([FileType,TTFB_50,TTFB_95,TTFB_99,DownloadTime_50,DownloadTime_95,DownloadTime_99,Speed_50,Speed_95,Speed_99])
