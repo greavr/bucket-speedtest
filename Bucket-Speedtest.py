@@ -20,10 +20,11 @@ aws_s3 = {
     "One Zone Infrequent Access" : "https://rgreaves-public.s3-us-west-2.amazonaws.com/one_zone-ia.txt"
 }
 azure_blobs = {
-    "Premium" : "",
-    "Hot" : "",
-    "Cool" : "",
-    "Archive" : ""
+    "Premium Local Redundant Hot" : "https://lrshotpremium.blob.core.windows.net/public/lrshotpremium.txt",
+    "Hot Local Redundant" : "https://lrsblobhot.blob.core.windows.net/public/lrsblobhot.txt",
+    "Cool Local Redundant" : "https://lrsblobcool.blob.core.windows.net/public/lrsblobcool.txt",
+    "Hot Regionally Redundant" : "https://rahot.blob.core.windows.net/public/rahot.txt",
+    "Cool Regionally Redundant" : "https://racool.blob.core.windows.net/public/racool.txt"
 }
 
 # Parameters
