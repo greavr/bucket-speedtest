@@ -15,9 +15,9 @@ gcp_gcs = {
     "Nearline" : "https://storage.googleapis.com/rgreaves-nearline/nearline-file-100mb.txt"
 }
 aws_s3 = {
-    "Standard" : "https://rgreaves-public.s3-us-west-2.amazonaws.com/standard.txt",
-    "Infrequent Access" : "https://rgreaves-public.s3-us-west-2.amazonaws.com/standard-ia.txt",
-    "One Zone Infrequent Access" : "https://rgreaves-public.s3-us-west-2.amazonaws.com/one_zone-ia.txt"
+    "Standard" : "https://rgreaves-public.s3-us-west-2.amazonaws.com/standard-100mb.txt",
+    "Infrequent Access" : "https://rgreaves-public.s3-us-west-2.amazonaws.com/standard-ia-100mb.txt",
+    "One Zone Infrequent Access" : "https://rgreaves-public.s3-us-west-2.amazonaws.com/one_zone-ia-100mb.txt"
 }
 azure_blobs = {
     "Premium Local Redundant Hot" : "https://lrshotpremium.blob.core.windows.net/public/lrshotpremium-100mb.txt",
