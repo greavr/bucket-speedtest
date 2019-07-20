@@ -25,7 +25,7 @@ Each file is downloaded 3 times by default to generate statistics, this can be o
 *Debian*
 ```
 sudo apt-get update
-sudo apt-get install -y libcurl4-openssl-dev libssl-dev python3 python3-pip python-pycurl
+sudo apt-get install -y libcurl4-openssl-dev libssl-dev python3 python3-pip python-pip
 ```
 
 ## Install Steps
@@ -39,7 +39,7 @@ pip3 install -r requirements.txt
 ```
 python3 Bucket-Speedtest.py
 ```
-This will download a set of sample file from GCP, AWS, Azure which repesents each class of storage. Some Caveats:
+This will download a set of sample file from GCP, AWS, Azure which represents each class of storage. Some Caveats:
 AWS Glacier is not able to make files publicly accessible, and must be called via API.
 
 ## Advanced
@@ -49,6 +49,7 @@ python Bucket-Speedtest.py -h
 This will output a list of all *optional* parameters, listed below:
 ```
 -i Is the number of times each file should be downloaded to generate the averages
+-v Options enables more verbose logging output, detailing each request
 -gcp This points to a CSV file which contains the GCS Storage Class and path to public file
 -aws This points to a CSV file which contains the AWS Storage Class and path to public file
 -azure This points to a CSV file which contains the Azure Storage Class and path to public file
