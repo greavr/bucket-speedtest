@@ -16,6 +16,18 @@ After this is gathered for each download itteration the following averages are c
 Default files are baked into the script, and can be over-ridden via flags below.
 Each file is downloaded 3 times by default to generate statistics, this can be over-ridden via flags below
 
+## Requirements
+* Python
+* pip
+* libcurl4-openssl-dev
+* libssl-dev
+
+*Debian*
+```
+sudo apt-get update
+sudo apt-get install -y libcurl4-openssl-dev libssl-dev python3 python3-pip
+```
+
 ## Install Steps
 ```
 git clone https://github.com/greavr/bucket-speedtest/
